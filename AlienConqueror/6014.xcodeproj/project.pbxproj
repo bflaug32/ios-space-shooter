@@ -56,13 +56,6 @@
 		3AD906281B4B1BC100FE5946 /* Start.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AD906271B4B1BC100FE5946 /* Start.png */; };
 		3AD906311B4C1CF100FE5946 /* 6014.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3AD9062F1B4C1CF100FE5946 /* 6014.aiff */; };
 		3AD906321B4C1CF100FE5946 /* 6014play.aiff in Resources */ = {isa = PBXBuildFile; fileRef = 3AD906301B4C1CF100FE5946 /* 6014play.aiff */; };
-		3AE988CC1B4C937B00589126 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988CB1B4C937B00589126 /* CoreMedia.framework */; };
-		3AE988CE1B4C938300589126 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988CD1B4C938300589126 /* CoreMotion.framework */; };
-		3AE988D01B4C938C00589126 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988CF1B4C938C00589126 /* AVFoundation.framework */; };
-		3AE988D21B4C939400589126 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988D11B4C939400589126 /* SystemConfiguration.framework */; };
-		3AE988D41B4C939D00589126 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988D31B4C939D00589126 /* OpenGLES.framework */; };
-		3AE988D81B4C97CA00589126 /* libTestFairy.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3AE988D51B4C97CA00589126 /* libTestFairy.a */; };
-		3AE988D91B4C97CA00589126 /* upload-dsym.sh in Resources */ = {isa = PBXBuildFile; fileRef = 3AE988D71B4C97CA00589126 /* upload-dsym.sh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,15 +122,6 @@
 		3AD906271B4B1BC100FE5946 /* Start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Start.png; path = ../../Start.png; sourceTree = "<group>"; };
 		3AD9062F1B4C1CF100FE5946 /* 6014.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = 6014.aiff; path = ../../6014.aiff; sourceTree = "<group>"; };
 		3AD906301B4C1CF100FE5946 /* 6014play.aiff */ = {isa = PBXFileReference; lastKnownFileType = audio.aiff; name = 6014play.aiff; path = ../../6014play.aiff; sourceTree = "<group>"; };
-		3AE988C81B4C928400589126 /* Bridging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Bridging.h; path = ../Bridging.h; sourceTree = "<group>"; };
-		3AE988CB1B4C937B00589126 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
-		3AE988CD1B4C938300589126 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
-		3AE988CF1B4C938C00589126 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		3AE988D11B4C939400589126 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		3AE988D31B4C939D00589126 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		3AE988D51B4C97CA00589126 /* libTestFairy.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFairy.a; sourceTree = "<group>"; };
-		3AE988D61B4C97CA00589126 /* TestFairy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFairy.h; sourceTree = "<group>"; };
-		3AE988D71B4C97CA00589126 /* upload-dsym.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "upload-dsym.sh"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,12 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3AE988D41B4C939D00589126 /* OpenGLES.framework in Frameworks */,
-				3AE988D81B4C97CA00589126 /* libTestFairy.a in Frameworks */,
-				3AE988D21B4C939400589126 /* SystemConfiguration.framework in Frameworks */,
-				3AE988D01B4C938C00589126 /* AVFoundation.framework in Frameworks */,
-				3AE988CE1B4C938300589126 /* CoreMotion.framework in Frameworks */,
-				3AE988CC1B4C937B00589126 /* CoreMedia.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,11 +145,6 @@
 		3AD53A221B388A0D0032B64B = {
 			isa = PBXGroup;
 			children = (
-				3AE988D31B4C939D00589126 /* OpenGLES.framework */,
-				3AE988D11B4C939400589126 /* SystemConfiguration.framework */,
-				3AE988CF1B4C938C00589126 /* AVFoundation.framework */,
-				3AE988CD1B4C938300589126 /* CoreMotion.framework */,
-				3AE988CB1B4C937B00589126 /* CoreMedia.framework */,
 				3AD53A2D1B388A0E0032B64B /* AlienConqueror */,
 				3AD53A471B388A0E0032B64B /* AlienConquerorTests */,
 				3AD53A2C1B388A0E0032B64B /* Products */,
@@ -190,12 +163,8 @@
 		3AD53A2D1B388A0E0032B64B /* AlienConqueror */ = {
 			isa = PBXGroup;
 			children = (
-				3AE988D51B4C97CA00589126 /* libTestFairy.a */,
-				3AE988D61B4C97CA00589126 /* TestFairy.h */,
-				3AE988D71B4C97CA00589126 /* upload-dsym.sh */,
 				3AD53A301B388A0E0032B64B /* AppDelegate.swift */,
 				3AD53A321B388A0E0032B64B /* GameScene.sks */,
-				3AE988C81B4C928400589126 /* Bridging.h */,
 				3AD53A341B388A0E0032B64B /* GameScene.swift */,
 				3AAE84471B38D01D00ED4957 /* spark.png */,
 				3AD53A361B388A0E0032B64B /* GameViewController.swift */,
@@ -318,7 +287,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Brad Flaugher";
 				TargetAttributes = {
 					3AD53A2A1B388A0E0032B64B = {
@@ -385,7 +354,6 @@
 				3A1D21F61B473111002BE4AC /* 7.png in Resources */,
 				3A1D21F81B473111002BE4AC /* 9.png in Resources */,
 				3AA559831B44986500E4D123 /* Upgrade.png in Resources */,
-				3AE988D91B4C97CA00589126 /* upload-dsym.sh in Resources */,
 				3AD906311B4C1CF100FE5946 /* 6014.aiff in Resources */,
 				3A0AC1061B5F2E090095BAF9 /* g6.png in Resources */,
 				3AD53A331B388A0E0032B64B /* GameScene.sks in Resources */,
@@ -483,6 +451,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -502,6 +471,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -540,6 +511,8 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -558,6 +531,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AlienConqueror",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = /Users/bradflaugher/AlienConqueror/AlienConqueror/Bridging.h;
@@ -578,6 +552,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/AlienConqueror",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014;
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = /Users/bradflaugher/AlienConqueror/AlienConqueror/Bridging.h;
@@ -598,6 +573,7 @@
 				);
 				INFOPLIST_FILE = AlienConquerorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014Tests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/6014.app/6014";
 			};
@@ -612,6 +588,7 @@
 				);
 				INFOPLIST_FILE = AlienConquerorTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014Tests;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/6014.app/6014";
 			};
