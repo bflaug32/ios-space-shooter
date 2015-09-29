@@ -372,9 +372,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             var error:NSError?
             do {
                 ThemePlayer = try AVAudioPlayer(contentsOfURL: enemy1sound)
-            } catch var error1 as NSError {
+            } catch let error1 as NSError {
                 error = error1
-                ThemePlayer = nil
+                NSLog("\(error)")
             }
 
             if(!ThemePlayer.playing){
@@ -904,8 +904,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         convenience init(imageNamed name: String, health: Int, points: Int)
         {
-            var texture = SKTexture(imageNamed: name)
-            self.init(texture: texture, color: nil, size: texture.size())
+            let texture = SKTexture(imageNamed: name)
+            self.init(texture: texture)
             self.health = health
             self.points = points
         }

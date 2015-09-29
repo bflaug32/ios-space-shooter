@@ -534,7 +534,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/bradflaugher/AlienConqueror/AlienConqueror/Bridging.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -555,7 +554,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "bradflaugher.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = 6014;
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/bradflaugher/AlienConqueror/AlienConqueror/Bridging.h;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
