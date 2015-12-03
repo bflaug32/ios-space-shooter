@@ -1,0 +1,47 @@
+PODS:
+  - Bolts/AppLinks (1.5.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.5.0)
+  - ImojiSDK (2.0.0):
+    - ImojiSDK/Core (= 2.0.0)
+    - ImojiSDK/Sync (= 2.0.0)
+  - ImojiSDK/Core (2.0.0):
+    - Bolts/Tasks (~> 1.2)
+    - libwebp (~> 0.4.3)
+  - ImojiSDK/Sync (2.0.0):
+    - Bolts/AppLinks (~> 1.2)
+    - ImojiSDK/Core
+  - libwebp (0.4.3):
+    - libwebp/core (= 0.4.3)
+    - libwebp/dec (= 0.4.3)
+    - libwebp/demux (= 0.4.3)
+    - libwebp/dsp (= 0.4.3)
+    - libwebp/enc (= 0.4.3)
+    - libwebp/mux (= 0.4.3)
+    - libwebp/utils (= 0.4.3)
+    - libwebp/webp (= 0.4.3)
+  - libwebp/core (0.4.3):
+    - libwebp/webp
+  - libwebp/dec (0.4.3):
+    - libwebp/core
+  - libwebp/demux (0.4.3):
+    - libwebp/core
+  - libwebp/dsp (0.4.3):
+    - libwebp/core
+  - libwebp/enc (0.4.3):
+    - libwebp/core
+  - libwebp/mux (0.4.3):
+    - libwebp/core
+  - libwebp/utils (0.4.3):
+    - libwebp/core
+  - libwebp/webp (0.4.3)
+
+DEPENDENCIES:
+  - ImojiSDK
+
+SPEC CHECKSUMS:
+  Bolts: 722ab9a4f8b50fc4ed1b9998a5a7a2b3f16d80b4
+  ImojiSDK: d00d8e982e16677c1db94514c546f772eab55638
+  libwebp: 360ed8bc4ec8da413f07f84071e7f5a5c67a285d
+
+COCOAPODS: 0.39.0
