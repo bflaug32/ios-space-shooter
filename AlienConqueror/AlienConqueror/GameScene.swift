@@ -12,6 +12,7 @@ import AudioToolbox
 import Darwin
 import CoreMotion
 import AVFoundation
+import ImojiSDK
 
 struct PhysicsCategory {
     static let Enemy : UInt32 = 1
@@ -23,6 +24,11 @@ struct PhysicsCategory {
 }
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
+    
+    //Imoji setup
+    private var session: IMImojiSession!
+    var playerImoji = IMImojiObject()
+
     
     //startButton
     var startButton = UIButton()
@@ -267,8 +273,44 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.view!.addSubview(pauseButton)
         
         
-        //Set inital player sprite
-        player = SKSpriteNode(imageNamed: "g3.png")
+        var imojiSuccess = false
+        
+        //get imoji for initial setup, first search
+        session.searchImojisWithTerm("kanye", offset: 0, numberOfResults: 1,
+            resultSetResponseCallback:{ resultCount, error in
+            if error == nil {
+            }
+            else{
+                imojiSuccess = false
+            }
+            },
+            imojiResponseCallback:{ imoji,index,error in
+                if error == nil {
+                    self.playerImoji = imoji!
+                }
+                else{
+                    imojiSuccess = false
+                }
+        })
+        
+        //now render the imoji
+        session.renderImoji(playerImoji, options: IMImojiObjectRenderingOptions(renderSize: IMImojiObjectRenderSize.SizeThumbnail), callback:{ image, error in
+            if error == nil {
+                let texture = SKTexture(image: image!)
+                self.player = SKSpriteNode(texture: texture)
+                imojiSuccess = true
+            }
+            else{
+                imojiSuccess = false
+            }
+        })
+        
+        //if it didn't work, use the a default sprite
+        if(!imojiSuccess){
+            self.player = SKSpriteNode(imageNamed: "g3.png")
+        }
+        
+        //Set inital bullet sprite
         bulletTexture = "Bullet.png"
         
         //Set the background color and add an SKEmitterNode
