@@ -26,9 +26,9 @@ struct PhysicsCategory {
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
     //Imoji setup
-    private var session: IMImojiSession!
-    var playerImoji = IMImojiObject()
-
+    private var session = IMImojiSession()
+    var playerImojis = [UIImage()]
+    var enemyImojis = [UIImage()]
     
     //startButton
     var startButton = UIButton()
@@ -272,43 +272,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         pauseButton.addTarget(self, action: "pause", forControlEvents: .TouchUpInside)
         self.view!.addSubview(pauseButton)
         
+        //setup player sprite
+        self.player = SKSpriteNode(imageNamed: "g3.png")
         
-        var imojiSuccess = false
-        
-        //get imoji for initial setup, first search
-        session.searchImojisWithTerm("kanye", offset: 0, numberOfResults: 1,
-            resultSetResponseCallback:{ resultCount, error in
-            if error == nil {
-            }
-            else{
-                imojiSuccess = false
-            }
-            },
-            imojiResponseCallback:{ imoji,index,error in
-                if error == nil {
-                    self.playerImoji = imoji!
-                }
-                else{
-                    imojiSuccess = false
-                }
-        })
-        
-        //now render the imoji
-        session.renderImoji(playerImoji, options: IMImojiObjectRenderingOptions(renderSize: IMImojiObjectRenderSize.SizeThumbnail), callback:{ image, error in
-            if error == nil {
-                let texture = SKTexture(image: image!)
-                self.player = SKSpriteNode(texture: texture)
-                imojiSuccess = true
-            }
-            else{
-                imojiSuccess = false
-            }
-        })
-        
-        //if it didn't work, use the a default sprite
-        if(!imojiSuccess){
-            self.player = SKSpriteNode(imageNamed: "g3.png")
-        }
+        //setup imojis
+        setupImoji()
         
         //Set inital bullet sprite
         bulletTexture = "Bullet.png"
@@ -318,7 +286,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         //Setup the Player/Ship and the physics of the player
         physicsWorld.contactDelegate=self
-        player.position = CGPointMake(self.size.width / 2, self.size.height / 7.5)
+        player.position = CGPointMake(self.size.width / 2, self.size.height / 6.6)
         player.physicsBody = SKPhysicsBody(rectangleOfSize: player.size)
         player.physicsBody?.affectedByGravity = false
         player.physicsBody?.categoryBitMask = PhysicsCategory.Player
@@ -329,7 +297,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.addChild(player)
         
         if(infMode==true){
-            sparkleTimer = NSTimer.scheduledTimerWithTimeInterval(timeBetweenBullets/4, target: self, selector: Selector("sparklePlayer"), userInfo: nil, repeats: true)
+            sparkleTimer = NSTimer.scheduledTimerWithTimeInterval(timeBetweenBullets*5, target: self, selector: Selector("sparklePlayer"), userInfo: nil, repeats: true)
         }
     
     
@@ -427,6 +395,72 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         }
     }
+    
+    //*********************************************************************************************
+    //*******************************IMOJI SETUP********************************************
+    //*********************************************************************************************
+    
+    
+    func setupImoji(){
+        //get imoji for initial setup,
+        session.searchImojisWithTerm("kanye", offset: 0, numberOfResults: 10,
+            resultSetResponseCallback:{ resultCount, error in
+                if error == nil {
+                    NSLog("Succeeded search pt1")
+                }
+                else{
+                    NSLog("failed in search pt1")
+                }
+            },
+            imojiResponseCallback:{ imoji,index,error in
+                if error == nil {
+                    NSLog("Succeeded search pt2")
+                    self.session.renderImoji(imoji!, options: IMImojiObjectRenderingOptions(renderSize: IMImojiObjectRenderSize.Size320), callback:{ image, error in
+                        if error == nil {
+                            self.playerImojis.append(image!)
+                            self.player.texture = SKTexture(image: image!)
+                            NSLog("succeeded rendering")
+                        }
+                        else{
+                            NSLog("failed to render")
+                        }
+                    })
+                    
+                }
+                else{
+                    NSLog("failed to search pt2")
+                }
+        })
+        //get imoji for initial setup,
+        session.searchImojisWithTerm("faded", offset: 0, numberOfResults: 20,
+            resultSetResponseCallback:{ resultCount, error in
+                if error == nil {
+                    NSLog("Succeeded search pt1")
+                }
+                else{
+                    NSLog("failed in search pt1")
+                }
+            },
+            imojiResponseCallback:{ imoji,index,error in
+                if error == nil {
+                    NSLog("Succeeded search pt2")
+                    self.session.renderImoji(imoji!, options: IMImojiObjectRenderingOptions(renderSize: IMImojiObjectRenderSize.Size320), callback:{ image, error in
+                        if error == nil {
+                            self.enemyImojis.append(image!)
+                            NSLog("succeeded rendering")
+                        }
+                        else{
+                            NSLog("failed to render")
+                        }
+                    })
+                    
+                }
+                else{
+                    NSLog("failed to search pt2")
+                }
+        })
+    }
+    
     //*********************************************************************************************
     //*******************************PAUSING RESTARTING********************************************
     //*********************************************************************************************
@@ -801,7 +835,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func setupEnemy(enemyTexture: String, enemyHealth: Int, positionType: Int, pathType: Int, gunType: Int, timeToFlyEnemies: Double, points: Int, isBoss: Bool){
         //setup the enemy
-        let enemy = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: points )
+        var enemy:BJEnemy!
+        
+        if(points==0){
+            enemy = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: points, imojiImages: [UIImage()] )
+        }
+        else{
+            enemy = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: points, imojiImages: enemyImojis )
+        }
         
         
         //starting position of the enemy if specified overrides the rest of this shit
@@ -944,9 +985,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             super.init(texture: texture, color: color, size: size)
         }
         
-        convenience init(imageNamed name: String, health: Int, points: Int)
+        convenience init(imageNamed name: String, health: Int, points: Int, imojiImages: [UIImage])
         {
-            let texture = SKTexture(imageNamed: name)
+            var texture = SKTexture(imageNamed: name)
+
+            if(imojiImages.count>0){
+                texture = SKTexture(image: imojiImages[Int(arc4random_uniform(UInt32(imojiImages.count)))])
+            }
             self.init(texture: texture)
             self.health = health
             self.points = points
@@ -969,7 +1014,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let parent = timer.userInfo as! BJEnemy
         
         //setup the bullet, which is just another enemy
-        let enemyBullet = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: 0)
+        let enemyBullet = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: 0, imojiImages: [UIImage]())
         
         //THIS NEEDS TO BE PASSED IN
         enemyBullet.position = parent.position
@@ -999,7 +1044,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         let parent = timer.userInfo as! BJEnemy
         
         //setup the bullet, which is just another enemy
-        let enemyBullet = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: 0)
+        let enemyBullet = BJEnemy(imageNamed:enemyTexture, health: enemyHealth, points: 0,imojiImages: [UIImage]())
         
         //THIS NEEDS TO BE PASSED IN
         enemyBullet.position = parent.position
@@ -1158,25 +1203,50 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func sparklePlayer(){
         if(sparkle==1){
-            player.texture = SKTexture(imageNamed: "g8.png")
+            if(self.playerImojis.count>0){
+                player.texture = SKTexture(image: self.playerImojis[1])
+            }
+            else{
+                player.texture = SKTexture(imageNamed: "g8.png")
+            }
             sparkle = sparkle + 1
         }
         else if (sparkle==2){
-            player.texture = SKTexture(imageNamed: "g4.png")
-            sparkle = sparkle + 1
-        }
-        else if (sparkle==3){
-            player.texture = SKTexture(imageNamed: "g5.png")
-            sparkle = sparkle + 1
-        }
-        else if (sparkle==4){
-            player.texture = SKTexture(imageNamed: "g6.png")
-            sparkle = sparkle + 1
-        }
-        else{
-            player.texture = SKTexture(imageNamed: "g7.png")
+            if(self.playerImojis.count>1){
+                player.texture = SKTexture(image: self.playerImojis[2])
+            }
+            else{
+                player.texture = SKTexture(imageNamed: "g4.png")
+            }
             sparkle = 1
         }
+//        else if (sparkle==3){
+//            if(self.playerImojis.count>0){
+//                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+//            }
+//            else{
+//                player.texture = SKTexture(imageNamed: "g5.png")
+//            }
+//            sparkle = sparkle + 1
+//        }
+//        else if (sparkle==4){
+//            if(self.playerImojis.count>0){
+//                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+//            }
+//            else{
+//                player.texture = SKTexture(imageNamed: "g6.png")
+//            }
+//            sparkle = sparkle + 1
+//        }
+//        else{
+//            if(self.playerImojis.count>0){
+//                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+//            }
+//            else{
+//                player.texture = SKTexture(imageNamed: "g7.png")
+//            }
+//            sparkle = 1
+//        }
     }
     
     
@@ -1204,14 +1274,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         }
         
         if (health >= Int(0.66 * Double(maxHealth)) ){
-            player.texture = SKTexture(imageNamed: "g3.png")
+            if(self.playerImojis.count>0){
+                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+            }
+            else{
+                player.texture = SKTexture(imageNamed: "g3.png")
+            }
         }
         else if (health >= Int(0.33 * Double(maxHealth)) ){
-            player.texture = SKTexture(imageNamed: "g2.png")
-        }
+            if(self.playerImojis.count>0){
+                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+            }
+            else{
+                player.texture = SKTexture(imageNamed: "g2.png")
+            }        }
         else if (health > 0){
-            player.texture = SKTexture(imageNamed: "g1.png")
-        }
+            if(self.playerImojis.count>0){
+                player.texture = SKTexture(image: self.playerImojis[Int(arc4random_uniform(UInt32(self.playerImojis.count)))])
+            }
+            else{
+                player.texture = SKTexture(imageNamed: "g1.png")
+            }        }
         else if(health == 0){
             endGame()
         }
